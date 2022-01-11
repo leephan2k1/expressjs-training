@@ -5,6 +5,8 @@ const { engine } = require("express-handlebars");
 const app = express();
 const port = 3000;
 
+const route = require("./routes");
+
 //middleware handle form submit
 app.use(
   express.urlencoded({
@@ -25,20 +27,7 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
 
 //routing
-app.get("/", (req, res) => {
-  res.render("home");
-});
-app.get("/news", (req, res) => {
-  console.log(req.query.keyword);
-  res.render("news");
-});
-app.get("/search", (req, res) => {
-  res.render("search");
-});
-app.post("/search", (req, res) => {
-  console.log(req.body.keyword);
-  res.send("");
-});
+route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
