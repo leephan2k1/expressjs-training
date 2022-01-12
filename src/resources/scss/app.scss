@@ -8,3 +8,14 @@ footer {
 .search-form {
   width: 50%;
 }
+.card-item {
+  .card-title,
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.card-item + .card-item {
+  margin-left: 1rem;
+}
