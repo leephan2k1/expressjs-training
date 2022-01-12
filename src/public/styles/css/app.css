@@ -14,3 +14,6 @@ footer {
 
 .card-item + .card-item {
   margin-left: 1rem; }
+
+.create-form {
+  width: 400px; }

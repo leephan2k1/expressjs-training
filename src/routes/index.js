@@ -10,8 +10,7 @@ function route(app) {
   app.use("/", siteRouter);
 
   app.post("/search", (req, res) => {
-    console.log(req.body.keyword);
-    res.send("");
+    res.send(req.body.keyword);
   });
 }
 
