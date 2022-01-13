@@ -19,7 +19,12 @@
             <td>{{this.videoId}}</td>
             <td>
               <a href="/courses/edit/{{this._id}}" class="btn btn-link">Sửa</a>
-              <a class="btn btn-link">Xoá</a>
+              <a
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                data-id="{{this._id}}"
+              >Xoá</a>
             </td>
           </tr>
         {{/each}}
@@ -27,3 +32,61 @@
     </table>
   </div>
 </div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc muốn xoá không?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Nhầm</button>
+        <button id="delete-btn" type="button" class="btn btn-danger">Chắc chắn</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- delete hidden form  --}}
+<form method="POST" name="delete-form-course"></form>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const exampleModal = document.getElementById('exampleModal')
+    let id;
+    const deleteForm = document.forms["delete-form-course"]
+
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget
+      id = button.getAttribute('data-id')
+    })
+
+    const delBtn = document.getElementById('delete-btn')
+    delBtn.addEventListener('click', () => {
+      deleteForm.action = `/courses/${id}?_method=DELETE`
+      deleteForm.submit()
+    })
+})
+</script>

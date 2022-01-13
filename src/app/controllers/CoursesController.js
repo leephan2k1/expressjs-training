@@ -41,6 +41,15 @@ class CoursesController {
     // res.json(req.body);
   }
 
+  //[DELETE] /courses/:id
+  delete(req, res, next) {
+    Course.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.redirect("/me/stored/courses");
+      })
+      .catch(next);
+  }
+
   //[POST] /courses/create
   store(req, res) {
     // res.json(req.body);
