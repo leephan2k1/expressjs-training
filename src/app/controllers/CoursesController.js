@@ -15,9 +15,30 @@ class CoursesController {
       .catch(next);
   }
 
+  //[GET] /courses/edit/:id
+  edit(req, res, next) {
+    Course.findById(req.params.id)
+      .then((course) => {
+        res.render("courses/edit", {
+          course: mongooseToObject(course),
+        });
+      })
+      .catch(next);
+  }
+
   //[GET] /courses/create
   create(req, res, next) {
     res.render("courses/create");
+  }
+
+  //[PUT] /courses/:id
+  update(req, res, next) {
+    Course.updateOne({ _id: req.params.id }, req.body)
+      .then(() => {
+        res.redirect("/me/stored/courses");
+      })
+      .catch(next);
+    // res.json(req.body);
   }
 
   //[POST] /courses/create

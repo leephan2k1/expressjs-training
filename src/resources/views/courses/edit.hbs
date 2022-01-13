@@ -1,0 +1,39 @@
+<div class="mt-6 d-flex flex-column align-items-center">
+  <h3>Sửa khoá khoá học</h3>
+  <form method="POST" class='create-form' action="/courses/{{course._id}}?_method=PUT">
+    <div class="mb-3">
+
+    <label for="name" class="form-label">Tên</label>
+      <input
+        name="name"
+        type="text"
+        class="form-control"
+        id="name"
+        value="{{course.name}}"
+      />
+      <label for="description" class="form-label">Mô tả</label>
+      <textarea
+        name="description"
+        class="form-control"
+        id="description"
+      >{{course.description}}</textarea>
+      <label for="videoId" class="form-label">VideoId</label>
+      <input
+        name="videoId"
+        type="text"
+        class="form-control"
+        id="videoId"
+        value="{{course.videoId}}"
+      />
+    <label for="image" class="form-label">Image URL</label>
+      <input
+        name="image"
+        type="text"
+        class="form-control"
+        id="image"
+        value="{{course.image}}"
+      />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

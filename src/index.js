@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const { engine } = require("express-handlebars");
+const methodOverride = require("method-override");
 const app = express();
 const port = 3000;
 
@@ -18,6 +19,9 @@ app.use(
   })
 );
 app.use(express.json());
+
+//override with method HTTP
+app.use(methodOverride("_method"));
 
 //Serving static files in Express
 app.use(express.static(path.join(__dirname, "public")));
