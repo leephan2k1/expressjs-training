@@ -5,6 +5,7 @@
 ├── app
 │   ├── controllers
 │   │   ├── CoursesController.js
+│   │   ├── MeController.js
 │   │   ├── NewsController.js
 │   │   └── SitesController.js
 │   └── models
@@ -24,10 +25,16 @@
 │   │   ├── _variables.scss
 │   │   └── app.scss
 │   └── views
-│       ├── course.hbs
+│       ├── courses
+│       │   ├── course.hbs
+│       │   ├── create.hbs
+│       │   └── edit.hbs
 │       ├── home.hbs
 │       ├── layouts
 │       │   └── main.hbs
+│       ├── me
+│       │   ├── stored-courses.hbs
+│       │   └── trash-courses.hbs
 │       ├── news.hbs
 │       ├── partials
 │       │   ├── footer.hbs
@@ -36,6 +43,7 @@
 ├── routes
 │   ├── courses.js
 │   ├── index.js
+│   ├── me.js
 │   ├── news.js
 │   └── sites.js
 └── utils
@@ -47,13 +55,21 @@
 ### Initial npm
 
 - First of all, we need install nodejs & npm.
+- If you clone this project (But i don't think no anyone clone this learning project). You just run:
+
+```
+npm install
+```
+
+- Why don't we install all in one? Because there are some things installed in the dev environment and there are some things that will depend on your preferences before seeing its functionality.
+
 - initial npm
 
 ```
 npm init
 ```
 
-- Install ExpressJS Framework:
+- Install ExpressJS framework:
 
 ```
 npm i express
@@ -75,4 +91,22 @@ npm i morgan --save-dev
 
 ```
 npm i mongoose
+```
+
+- Install url-slug package to optimize url for SEO
+
+```
+npm i url-slug
+```
+
+- Install nanoid handle same slug (this is my favorite package)
+
+```
+npm i nanoid
+```
+
+- Install method-override support DELETE, PUT, PATCH,... for HTML (HTML 5 only has POST & GET)
+
+```
+npm i method-override
 ```
