@@ -3,6 +3,7 @@ const urlSlug = require("url-slug");
 const { customAlphabet } = require("nanoid");
 const { mongooseToObject } = require("../../utils/mongoose");
 
+
 class CoursesController {
   //[GET] /courses/:slug
   index(req, res, next) {
@@ -43,12 +44,31 @@ class CoursesController {
 
   //[DELETE] /courses/:id
   delete(req, res, next) {
+    Course.delete({ _id: req.params.id })
+      .then(() => {
+        res.redirect("/me/stored/courses");
+      })
+      .catch(next);
+  }
+
+  //[DELETE] /courses/force/:id
+  forceDelete(req, res, next) {
     Course.deleteOne({ _id: req.params.id })
       .then(() => {
         res.redirect("/me/stored/courses");
       })
       .catch(next);
   }
+
+  //[PATCH] /restore/:id
+  restore(req, res, next) {
+    Course.restore({ _id: req.params.id })
+      .then(() => {
+        res.redirect("back");
+      })
+      .catch(next);
+  }
+
 
   //[POST] /courses/create
   store(req, res) {

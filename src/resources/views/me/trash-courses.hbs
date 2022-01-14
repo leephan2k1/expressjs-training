@@ -1,7 +1,7 @@
 <div class="mt-4">
   <div>
-    <h2>Khoá học của tôi</h2>
-    <a href="/me/trash/courses">Khoá học đã xoá</a>
+    <h2>Khoá học của tôi đã xoá</h2>
+    <a href="/me/stored/courses">Quay lại danh sách khoá học</a>
   </div>
   <div class="container">
     <table class="table">
@@ -21,19 +21,20 @@
             <td>{{this.description}}</td>
             <td>{{this.videoId}}</td>
             <td>
-              <a href="/courses/edit/{{this._id}}" class="btn btn-link">Sửa</a>
+              <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
               <a
                 class="btn btn-link"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 data-id="{{this._id}}"
-              >Xoá</a>
+              >Xoá vĩnh viễn</a>
             </td>
           </tr>
         {{else}}
-          <tr class='text-center'>
-            <td colspan="5" >Bạn chưa đăng khoá học nào!
-              <a href="/courses/create">Đăng khoá học</a>
+          <tr class="text-center">
+            <td colspan="5">
+              Thùng rác trống
+              <a href="/me/stored/courses">Trở về</a>
             </td>
           </tr>
 
@@ -77,26 +78,38 @@
   </div>
 </div>
 
-{{!-- delete hidden form  --}}
+
 <form method="POST" name="delete-form-course"></form>
 
-
+<form method="POST" name="restore-form-course"></form>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const exampleModal = document.getElementById('exampleModal')
-    let id;
-    const deleteForm = document.forms["delete-form-course"]
+  document.addEventListener("DOMContentLoaded", () => { 
+    const exampleModal = document.getElementById('exampleModal') 
+    let id; 
+    const deleteForm = document.forms["delete-form-course"];
+    const btnsRestore = document.querySelectorAll('.btn-restore'); 
+   
+    exampleModal.addEventListener('show.bs.modal', function (event) { 
+      const button = event.relatedTarget;
+      id = button.getAttribute('data-id') });
 
-    exampleModal.addEventListener('show.bs.modal', function (event) {
-      const button = event.relatedTarget
-      id = button.getAttribute('data-id')
+      const delBtn = document.getElementById('delete-btn');
+      delBtn.addEventListener('click', () => {
+          deleteForm.action = `/courses/force/${id}?_method=DELETE`;
+          deleteForm.submit();
+      }) 
+
+    btnsRestore.forEach(e => {
+      e.addEventListener('click', (event) => {
+        event.preventDefault();
+        const courseId = e.dataset.id;
+        const restoreForm = document.forms["restore-form-course"];
+        restoreForm.action = `/courses/restore/${courseId}?_method=PATCH`
+        restoreForm.submit();
+      })
     })
 
-    const delBtn = document.getElementById('delete-btn')
-    delBtn.addEventListener('click', () => {
-      deleteForm.action = `/courses/${id}?_method=DELETE`
-      deleteForm.submit()
-    })
-})
+
+  })
 </script>
