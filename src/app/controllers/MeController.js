@@ -5,19 +5,14 @@ class SitesController {
 
   //[GET] /me/stored/courses
   storedCourses(req, res, next) {
-    Courses.countDocumentsDeleted()
-      .then(number => {
-        console.log(number)
-      })
-      .catch(next)
-
-    Courses.find({})
-      .then((courses) => {
+    Promise.all([ Courses.find({}), Courses.countDocumentsDeleted()])
+      .then(([courses, count]) => {
         res.render("me/stored-courses", {
+          deletedCount: count,
           courses: multipleMongooseToObject(courses),
         });
       })
-      .catch(function (err) {});
+      .catch(next)
   }
 
   trashCourses(req, res, next) {
