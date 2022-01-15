@@ -32,6 +32,21 @@ class CoursesController {
     res.render("courses/create");
   }
 
+  //[POST] /courses/handle-form
+  handleForm(req, res, next) {
+    switch(req.body.action){
+      case "delete":
+          Course.delete({ _id: {$in: req.body.courseIds} })
+          .then(() => {
+            res.redirect("/me/stored/courses");
+          })
+          .catch(next);
+        break;
+      default:
+        console.log('something wrong!')
+    }
+  }
+
   //[PUT] /courses/:id
   update(req, res, next) {
     Course.updateOne({ _id: req.params.id }, req.body)
