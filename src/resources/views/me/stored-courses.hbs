@@ -24,9 +24,13 @@
         <tr>
           <th scope="col"></th>
           <th scope="col">#</th>
-          <th scope="col">Tên khoá học</th>
-          <th scope="col">Mô tả</th>
-          <th scope="col" colspan="2">VideoId</th>
+          <th scope="col">Tên khoá học {{{sortable 'name' _sort}}}
+            {{!-- <a href="?_sort&column=name&type=desc">
+              <span class="oi oi-elevator"></span>
+            </a> --}}
+          </th>
+          <th scope="col">Mô tả {{{sortable 'description' _sort}}}</th>
+          <th scope="col" colspan="2">VideoId {{{sortable 'videoId' _sort}}}</th>
         </tr>
       </thead>
       <tbody>

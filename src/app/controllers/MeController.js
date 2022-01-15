@@ -5,7 +5,15 @@ class SitesController {
 
   //[GET] /me/stored/courses
   storedCourses(req, res, next) {
-    Promise.all([ Courses.find({}), Courses.countDocumentsDeleted()])
+    let courseQuery =  Courses.find({});
+
+    if(req.query.hasOwnProperty("_sort") && (req.query.type !== 'default')){
+      courseQuery = courseQuery.sort({
+        [req.query.column]: req.query.type,
+      })
+    }
+
+    Promise.all([courseQuery, Courses.countDocumentsDeleted()])
       .then(([courses, count]) => {
         res.render("me/stored-courses", {
           deletedCount: count,
