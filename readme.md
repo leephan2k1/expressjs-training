@@ -9,6 +9,8 @@
 │   │   ├── MeController.js
 │   │   ├── NewsController.js
 │   │   └── SitesController.js
+│   ├── middlewares
+│   │   └── SortMiddleware.js
 │   └── models
 │       └── Courses.js
 ├── configure
@@ -18,9 +20,10 @@
 ├── public
 │   ├── images
 │   │   └── sugoi.png
-│   └── styles
-│       └── css
-│           └── app.css
+│   ├── styles
+│       └── css
+│           └── app.css
+│   
 ├── resources
 │   ├── scss
 │   │   ├── _variables.scss
@@ -115,10 +118,16 @@ npm i method-override
 ```
 npm i mongoose-delete
 ```
+- Install mongoose-sequence support to auto increment
+```
+npm i mongoose-sequence
+```
 
 ## Basic concepts:
 ### Route
-- Updating...
+- Route is a string of the form /segment/123 and is part of the URL
+- Routing in MVC model:
+![express-routing](https://dotnettrickscloud.blob.core.windows.net/img/nodejs/express-routing.png)
 ### Middleware
 - I think we don't need to find confusing documentation about middleware. Just looking at this image will summarize the middleware (Backend).
 ![middleware](https://topdev.vn/blog/wp-content/uploads/2019/05/middleware-la-gi.png)
