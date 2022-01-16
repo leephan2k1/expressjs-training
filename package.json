@@ -24,6 +24,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.1.6",
     "mongoose-delete": "^0.5.4",
+    "mongoose-sequence": "^5.3.1",
     "nanoid": "^3.1.32",
     "nodemon": "^2.0.15",
     "url-slug": "^3.0.2"
